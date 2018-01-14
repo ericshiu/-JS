@@ -1,4 +1,10 @@
 var chessBorad = [];
+var over = false;
+//贏法數組
+var wins = [];
+//贏法的統計數組
+var myWin = [];
+var computerWin = [];
 var me = true;
 var chess = document.getElementById('chess');
 var context = chess.getContext('2d');
@@ -7,6 +13,61 @@ for (var i = 0; i < 15; i++) {
   for (var j = 0; j < 15; j++) {
     chessBorad[i][j] = 0;
   }
+}
+for (var i = 0; i < 15; i++) {
+  wins[i] = [];
+  for (var j = 0; j < 15; j++) {
+    wins[i][j] = [];
+  }
+}
+//贏法種類
+var count = 0;
+//所有的橫線
+for (var i = 0; i < 15; i++) {
+  for (var j = 0; j < 11; j++) {
+    //  wins[0][0][0] = true;
+    //  wins[0][1][0] = true;
+    //  wins[0][2][0] = true;
+    //  wins[0][3][0] = true;
+    //  wins[0][4][0] = true;
+    for (var k = 0; k < 5; k++) {
+      wins[i][j + k][count] = true;
+    }
+    count++;
+  }
+}
+//所有的直線
+for (var i = 0; i < 15; i++) {
+  for (var j = 0; j < 11; j++) {
+    for (var k = 0; k < 5; k++) {
+      wins[j + k][i][count] = true;
+    }
+    count++;
+  }
+}
+//所有的斜線
+for (var i = 0; i < 11; i++) {
+  for (var j = 0; j < 11; j++) {
+    for (var k = 0; k < 5; k++) {
+      wins[i + k][j + k][count] = true;
+    }
+    count++;
+  }
+}
+//所有的反斜線
+for (var i = 0; i < 11; i++) {
+  for (var j = 14; j > 3; j--) {
+    for (var k = 0; k < 5; k++) {
+      wins[i + k][j - k][count] = true;
+    }
+    count++;
+  }
+}
+console.log(count);
+
+for (var i = 0; i < count; i++) {
+  myWin[i] = 0;
+  computerWin[i] = 0;
 }
 
 context.strokeStyle = '#BFBFBF';
@@ -49,6 +110,9 @@ var oneStep = function(i, j, me) {
 };
 //實現下棋
 chess.onclick = function(e) {
+  if (over) {
+    return;
+  }
   var x = e.offsetX;
   var y = e.offsetY;
   var i = Math.floor(x / 30);
@@ -61,6 +125,16 @@ chess.onclick = function(e) {
       chessBorad[i][j] = 2;
     }
     me = !me;
+    for (var k = 0; k < count; k++) {
+      if (wins[i][j][k]) {
+        myWin[k]++;
+        computerWin[k] = 6;
+        if (myWin[k] == 5) {
+          alert('你贏了');
+          over = true;
+        }
+      }
+    }
   } else {
     alert('非法定位置');
   }
