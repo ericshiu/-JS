@@ -169,21 +169,21 @@ var computerAI = function() {
           if (wins[i][j][k]) {
             //判斷黑子目前情況
             if (myWin[k] == 1) {
-              myScore[i][j] += 200;
+              myScore[i][j] += 210;
             } else if (myWin[k] == 2) {
-              myScore[i][j] += 400;
+              myScore[i][j] += 420;
             } else if (myWin[k] == 3) {
-              myScore[i][j] += 2000;
+              myScore[i][j] += 2200;
             } else if (myWin[k] == 4) {
               myScore[i][j] += 10000;
             }
             //判斷電腦目前其況
             if (computerWin[k] == 1) {
-              computerScore[i][j] += 220;
+              computerScore[i][j] += 200;
             } else if (computerWin[k] == 2) {
-              computerScore[i][j] += 420;
+              computerScore[i][j] += 400;
             } else if (computerWin[k] == 3) {
-              computerScore[i][j] += 2200;
+              computerScore[i][j] += 2000;
             } else if (computerWin[k] == 4) {
               computerScore[i][j] += 20000;
             }
