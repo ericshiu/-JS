@@ -3,4 +3,4 @@
 -------------------
 
 
-![alt text](https://raw.githubusercontent.com/ericshiu/Tetris/master/img.png)
+![alt text](https://raw.githubusercontent.com/ericshiu/Gobang-JS/master/img.png)
